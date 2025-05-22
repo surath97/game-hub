@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import axios from "axios";
 
-interface Game {
+export interface Game {
   id: number;
   name: string;
+  background_image: string;
 }
 
 interface FetchGames {
@@ -29,7 +30,7 @@ const useGames = () => {
         setError(err.message);
       })
 
-      return () => gameController.abort();
+    return () => gameController.abort();
 
   }, [])
 
