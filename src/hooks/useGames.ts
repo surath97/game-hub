@@ -25,24 +25,40 @@ const useGames = () => {
 
   const [games, setGames] = useState<Game []>([]);
   const [error, setError] = useState('');
+  const [isLoading, setLoading] = useState(false);
 
   
   useEffect(() => {
     
     const gameController = new AbortController();
+    let isActive = true;
+
+    setLoading(true);
 
     apiClient.get<FetchGames>('/games', { signal: gameController.signal })
-      .then(res => setGames(res.data.results))
+      .then(res => {
+        if (isActive) {
+          setGames(res.data.results);
+        }
+      })
       .catch(err => {
-        if(!axios.isCancel)
+        if(!axios.isCancel && isActive)
         setError(err.message);
       })
+      .finally(() => {
+        if (isActive) {
+          setLoading(false);
+        }
+      })
 
-    return () => gameController.abort();
+    return () => {
+      isActive = false;
+      gameController.abort();
+    }
 
   }, [])
 
-  return { games, error };
+  return { games, error, isLoading };
 
 }
 
