@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
 import { GrAndroid } from "react-icons/gr";
-import { SiIos, SiMacos, SiSega } from "react-icons/si";
+import { SiIos, SiMacos, SiSega, SiAtari, SiCommodore, SiD3Dotjs } from "react-icons/si";
 
 interface Props {
   platforms: Platform[];
@@ -33,7 +33,10 @@ function PlatformIconList({ platforms }: Props) {
     macos: SiMacos,
     web: FaInternetExplorer,
     sega: SiSega,
-    'neo-geo': FaInternetExplorer
+    atari: SiAtari,
+    "3do": SiD3Dotjs,
+    "commodore-amiga": SiCommodore,
+    'neo-geo': FaInternetExplorer,
   };
 
   return (
