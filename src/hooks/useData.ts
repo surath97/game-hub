@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 
 
 interface FetchResponse<T> {
@@ -8,7 +8,7 @@ interface FetchResponse<T> {
   results : T [];
 }
 
-const useData = <T>(endpoint: string) => {
+const useData = <T>(endpoint: string, requstConfig?: AxiosRequestConfig, deps?: any[]) => {
 
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState('');
@@ -21,7 +21,7 @@ const useData = <T>(endpoint: string) => {
 
     setLoading(true);
 
-    apiClient.get<FetchResponse<T>>(endpoint, { signal: dataController.signal })
+    apiClient.get<FetchResponse<T>>(endpoint, { signal: dataController.signal, ...requstConfig })
     .then(res => {
       if (isActive) {
         setData(res.data.results);
@@ -42,7 +42,7 @@ const useData = <T>(endpoint: string) => {
       dataController.abort();
     }
 
-  }, [])
+  }, deps ? [...deps] : [])
 
   return { data, error, isLoading };
 }
