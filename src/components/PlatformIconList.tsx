@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
 import { GrAndroid } from "react-icons/gr";
-import { SiIos } from "react-icons/si";
+import { SiIos, SiMacos, SiSega } from "react-icons/si";
 
 interface Props {
   platforms: Platform[];
@@ -30,7 +30,10 @@ function PlatformIconList({ platforms }: Props) {
     linux: FaLinux,
     android: GrAndroid,
     ios: SiIos,
+    macos: SiMacos,
     web: FaInternetExplorer,
+    sega: SiSega,
+    'neo-geo': FaInternetExplorer
   };
 
   return (
@@ -39,6 +42,10 @@ function PlatformIconList({ platforms }: Props) {
         <Icon key={pt.id} as={IconMap[pt.slug]} color="gray.500" />
       ))}
     </HStack>
+    // ------- Test new platforms
+    // <ul>
+    //   {platforms.map(p => <li>{p.slug}</li>)}
+    // </ul>
   );
 }
 
