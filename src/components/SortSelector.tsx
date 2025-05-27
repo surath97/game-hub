@@ -1,15 +1,30 @@
 import { Button, HStack, Icon, Menu } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
+interface Props {
+  SortSeItemClick: (sort: string) => void;
+  selectedSort: string;
+}
 
-function SortSelector() {
+function SortSelector({ SortSeItemClick, selectedSort }: Props) {
+
+  const sortOrders = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release Date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average Rating" },
+  ];
+
+  const currentSortOrder = sortOrders.find((order) => order.value === selectedSort);
 
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
         <Button variant="subtle" bg="bg.emphasized" borderRadius="md">
           <HStack>
-            Order By: Relavence
+            Order By: {currentSortOrder?.label || "Relevance"}
             <Icon>
               <BsChevronDown />
             </Icon>
@@ -18,21 +33,19 @@ function SortSelector() {
       </Menu.Trigger>
       <Menu.Positioner>
         <Menu.Content>
-          {/* {data.map((platform) => (
+          {sortOrders.map((sort) => (
             <Menu.Item
-              onClick={() => PlatformItemClick(platform)}
-              value={platform.slug}
-              key={platform.id}
+              onClick={() => SortSeItemClick(sort.value)}
+              value={sort.value}
+              key={sort.value}
             >
-              {platform.name}
+              {sort.label}
             </Menu.Item>
-          ))} */}
-          <Menu.Item value="date">Date</Menu.Item>
-          <Menu.Item value="name">Name</Menu.Item>
+          ))}
         </Menu.Content>
       </Menu.Positioner>
     </Menu.Root>
-  )
+  );
 }
 
 export default SortSelector;
