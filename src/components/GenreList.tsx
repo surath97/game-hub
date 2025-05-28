@@ -1,4 +1,4 @@
-import { HStack, Image, Link, List, Text } from "@chakra-ui/react";
+import { Heading, HStack, Image, Link, List, Text } from "@chakra-ui/react";
 import useGenres, { type Genre } from "../hooks/useGenres";
 import getCroppedImageURL from "../services/image-url";
 import GenreSkeleton from "./GenreSkeleton";
@@ -16,50 +16,54 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
   if (error) return null;
 
   return (
-    <List.Root listStyleType="none">
-      {/* Skeleton Loading */}
-      {isLoading &&
-        skeleton.map((sk) => (
-          <List.Item key={sk} paddingY="5px">
-            <GenreSkeleton key={sk} />
+    <>
+      <Heading marginBottom={3}>Genres</Heading>
+      <List.Root listStyleType="none">
+        {/* Skeleton Loading */}
+        {isLoading &&
+          skeleton.map((sk) => (
+            <List.Item key={sk} paddingY="5px">
+              <GenreSkeleton key={sk} />
+            </List.Item>
+          ))}
+        {/* Skeleton Loading */}
+        {data.map((genre) => (
+          <List.Item key={genre.id} paddingY="5px">
+            <HStack
+
+              // ------------------ onHover
+              transition="400ms"
+              _hover={{
+                textDecoration: "underline",
+                fontWeight: "semibold",
+                scale: "110%",
+                translate: "15px",
+              }}
+
+              // ------------------ onclicked
+              fontWeight={genre.id === clickedGenre?.id ? "semibold" : "normal"}
+              scale={genre.id === clickedGenre?.id ? "120%" : "100%"}
+              translate={genre.id === clickedGenre?.id ? "25px" : "0px"}
+
+            >
+              <Image
+                boxSize="32px"
+                borderRadius={8}
+                src={getCroppedImageURL(genre.image_background)}
+                objectFit="cover"
+              />
+              <Link
+                onClick={() => onSelectGenre(genre)}
+                fontSize="md"
+                _hover={{ textDecoration: "none" }}
+              >
+                {genre.name}
+              </Link>
+            </HStack>
           </List.Item>
         ))}
-      {/* Skeleton Loading */}
-      {data.map((genre) => (
-        <List.Item key={genre.id} paddingY="5px">
-          <HStack
-
-            // ------------------ onHover
-            transition="400ms"
-            _hover={{
-              textDecoration: "underline",
-              fontWeight: "semibold",
-              scale: "110%",
-              translate: "15px",
-            }}
-
-            // ------------------ onclicked
-            fontWeight={genre.id === clickedGenre?.id ? "semibold" : "normal"}
-            scale={genre.id === clickedGenre?.id ? "120%" : "100%"}
-            translate={genre.id === clickedGenre?.id ? "25px" : "0px"}
-
-          >
-            <Image
-              boxSize="32px"
-              borderRadius={8}
-              src={getCroppedImageURL(genre.image_background)}
-            />
-            <Link
-              onClick={() => onSelectGenre(genre)}
-              fontSize="md"
-              _hover={{ textDecoration: "none" }}
-            >
-              {genre.name}
-            </Link>
-          </HStack>
-        </List.Item>
-      ))}
-    </List.Root>
+      </List.Root>
+    </>
   );
 }
 
