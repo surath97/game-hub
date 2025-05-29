@@ -1,7 +1,5 @@
 import type { GameQuery } from "../App";
 import useData from "./useData";
-import type { Genre } from "./useGenres";
-import type { ParentPlatform } from "./usePlatforms";
 
 export interface Platform {
   id: number;
@@ -15,6 +13,7 @@ export interface Game {
   background_image: string;
   parent_platforms: { platform: Platform }[];
   metacritic: number | null;
+  rating_top: number;
 }
 
 const useGames = (gameQuery: GameQuery) =>
