@@ -32,7 +32,7 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
             <HStack
 
               // ------------------ onHover
-              transition="400ms"
+              transition="300ms"
               _hover={{
                 textDecoration: "underline",
                 fontWeight: "semibold",
@@ -44,6 +44,7 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
               fontWeight={genre.id === clickedGenre?.id ? "semibold" : "normal"}
               scale={genre.id === clickedGenre?.id ? "120%" : "100%"}
               translate={genre.id === clickedGenre?.id ? "25px" : "0px"}
+              borderRadius="4xl"
 
             >
               <Image
@@ -57,7 +58,15 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
                 fontSize="md"
                 _hover={{ textDecoration: "none" }}
               >
-                {genre.name}
+                <Text
+                  bgGradient="to-r" 
+                  gradientFrom="bg" 
+                  gradientTo="bg" 
+                  gradientVia={genre.id === clickedGenre?.id ? "purple.muted" : "bg"}
+                  paddingY={1}
+                >
+                  {genre.name}
+                </Text>
               </Link>
             </HStack>
           </List.Item>
