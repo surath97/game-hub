@@ -15,7 +15,7 @@ function GameGrid({ gameQuery }: Props) {
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8];
 
   if(error){
-    return (<Text>{error}</Text>)
+    return (<Text>{error.message}</Text>)
   }
 
   return (
@@ -32,7 +32,7 @@ function GameGrid({ gameQuery }: Props) {
           </GameCardContainer>
         ))}
       {/* Skeleton Loading */}
-      {data.map((game) => (
+      {data?.results.map((game) => (
         <GameCardContainer key={game.id}>
           <GameCard game={game} />
         </GameCardContainer> 
