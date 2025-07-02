@@ -27,7 +27,7 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
             </List.Item>
           ))}
         {/* Skeleton Loading */}
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <List.Item key={genre.id} paddingY="5px">
             <HStack
 

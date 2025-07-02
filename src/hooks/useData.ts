@@ -3,7 +3,7 @@ import apiClient from "../services/api-client";
 import axios, { type AxiosRequestConfig } from "axios";
 
 
-interface FetchResponse<T> {
+export interface FetchResponse<T> {
   count : number;
   results : T [];
 }
