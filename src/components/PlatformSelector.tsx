@@ -27,7 +27,7 @@ function PlatformSelector({ PlatformItemClick, selectedPlatform }: Props) {
       </Menu.Trigger>
       <Menu.Positioner>
         <Menu.Content>
-          {data.map((platform) => (
+          {data?.results.map((platform) => (
             <Menu.Item
               onClick={() => PlatformItemClick(platform)}
               value={platform.slug}
