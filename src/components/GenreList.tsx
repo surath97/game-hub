@@ -5,10 +5,10 @@ import GenreSkeleton from "./GenreSkeleton";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
-  clickedGenre: Genre | null;
+  clickedGenreId?: number;
 }
 
-function GenreList({ onSelectGenre, clickedGenre }: Props) {
+function GenreList({ onSelectGenre, clickedGenreId: clickedGenre }: Props) {
 
   const { data, isLoading, error } = useGenres();
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
@@ -41,9 +41,9 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
               }}
 
               // ------------------ onclicked
-              fontWeight={genre.id === clickedGenre?.id ? "semibold" : "normal"}
-              scale={genre.id === clickedGenre?.id ? "120%" : "100%"}
-              translate={genre.id === clickedGenre?.id ? "25px" : "0px"}
+              fontWeight={genre.id === clickedGenre ? "semibold" : "normal"}
+              scale={genre.id === clickedGenre ? "120%" : "100%"}
+              translate={genre.id === clickedGenre ? "25px" : "0px"}
               borderRadius="4xl"
 
             >
@@ -62,7 +62,7 @@ function GenreList({ onSelectGenre, clickedGenre }: Props) {
                   bgGradient="to-r" 
                   gradientFrom="bg" 
                   gradientTo="bg" 
-                  gradientVia={genre.id === clickedGenre?.id ? "purple.muted" : "bg"}
+                  gradientVia={genre.id === clickedGenre ? "purple.muted" : "bg"}
                   paddingY={1}
                 >
                   {genre.name}

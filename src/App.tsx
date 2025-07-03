@@ -10,9 +10,12 @@ import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 
 
+// undefined: The absence of a value
+// null:      The intenational absence of a value --> unselect
+
 export interface GameQuery {
-  genre: Genre | null;
-  platform: ParentPlatform | null;
+  genreId?: number;
+  platformId?: number;
   sortOrder: string;
   searchText: string;
 }
@@ -43,13 +46,13 @@ function App() {
         <NavBar onSerach={(searchText) => setGameQuery({...GameQuery, searchText})} />
       </GridItem>
       <GridItem area="aside" hideBelow="lg" paddingX={5}>
-        <GenreList clickedGenre={GameQuery.genre} onSelectGenre={(genre) => setGameQuery({...GameQuery, genre})} />
+        <GenreList clickedGenreId={GameQuery.genreId} onSelectGenre={(genre) => setGameQuery({...GameQuery, genreId: genre.id})} />
       </GridItem>
       <GridItem area="main">
         <Box paddingLeft='10px'>
           <GameHeading gameQuery={GameQuery} />
           <HStack gap={5} marginBottom={5}>
-            <PlatformSelector selectedPlatform={GameQuery.platform} PlatformItemClick={(platform) => setGameQuery({...GameQuery, platform})} />
+            <PlatformSelector selectedPlatformId={GameQuery.platformId} PlatformItemClick={(platform) => setGameQuery({...GameQuery, platformId: platform.id})} />
             <SortSelector selectedSort={GameQuery.sortOrder} SortSeItemClick={(sortOrder) => setGameQuery({...GameQuery, sortOrder})} />
           </HStack>
         </Box>

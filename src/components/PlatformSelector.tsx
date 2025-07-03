@@ -4,12 +4,14 @@ import usePlatforms, { type ParentPlatform } from "../hooks/usePlatforms";
 
 interface Props {
   PlatformItemClick: (platform: ParentPlatform) => void;
-  selectedPlatform: ParentPlatform | null;
+  selectedPlatformId?: number;
 }
 
-function PlatformSelector({ PlatformItemClick, selectedPlatform }: Props) {
+function PlatformSelector({ PlatformItemClick, selectedPlatformId }: Props) {
 
   const { data, error } = usePlatforms();
+
+  const selectedPlatform = data?.results.find(p => p.id === selectedPlatformId);
 
   if (error) return null;
 
