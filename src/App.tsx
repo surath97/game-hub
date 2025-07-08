@@ -13,20 +13,11 @@ import GameHeading from "./components/GameHeading";
 // undefined: The absence of a value
 // null:      The intenational absence of a value --> unselect
 
-export interface GameQuery {
-  genreId?: number;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
-
 
 function App() {
 
   // const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   // const [selectedPlatform, setSelectedPlatform] = useState<ParentPlatform | null>(null);
-
-  const [GameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery)
 
 
   return (
@@ -43,20 +34,20 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar onSerach={(searchText) => setGameQuery({...GameQuery, searchText})} />
+        <NavBar />
       </GridItem>
       <GridItem area="aside" hideBelow="lg" paddingX={5}>
-        <GenreList clickedGenreId={GameQuery.genreId} onSelectGenre={(genre) => setGameQuery({...GameQuery, genreId: genre.id})} />
+        <GenreList />
       </GridItem>
       <GridItem area="main">
         <Box paddingLeft='10px'>
-          <GameHeading gameQuery={GameQuery} />
+          <GameHeading />
           <HStack gap={5} marginBottom={5}>
-            <PlatformSelector selectedPlatformId={GameQuery.platformId} PlatformItemClick={(platform) => setGameQuery({...GameQuery, platformId: platform.id})} />
-            <SortSelector selectedSort={GameQuery.sortOrder} SortSeItemClick={(sortOrder) => setGameQuery({...GameQuery, sortOrder})} />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
         </Box>
-        <GameGrid gameQuery={GameQuery} />
+        <GameGrid />
       </GridItem>
     </Grid>
   );

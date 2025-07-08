@@ -1,18 +1,14 @@
 import { Center, Heading, Highlight, HStack, Image, SimpleGrid, Spinner, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import type { GameQuery } from "../App";
 import high_five from "../assets/icons8-high-five-black.gif";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
 
-interface Props {
-  gameQuery: GameQuery;
-}
 
-function GameGrid({ gameQuery }: Props) {
+function GameGrid() {
 
   const {
     data,
@@ -22,7 +18,7 @@ function GameGrid({ gameQuery }: Props) {
     isFetchingNextPage,
     fetchNextPage,
 
-  } = useGames(gameQuery);
+  } = useGames();
 
 
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8];
