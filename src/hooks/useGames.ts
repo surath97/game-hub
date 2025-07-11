@@ -18,6 +18,8 @@ export interface Game {
   rating_top: number;
 }
 
+// undefined: The absence of a value
+// null:      The intenational absence of a value --> unselect
 
 const apiClient = new APIClient<Game>('/games');
 
