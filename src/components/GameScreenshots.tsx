@@ -9,9 +9,10 @@ const GameScreenshots = ({ gameId }: Props ) => {
 
   const { data, error, isLoading } = useScreenshots(gameId);
   console.log(data);
-  if(isLoading) return null;
 
   if(error) throw error;
+
+   if(!data?.results[0]) return null;
 
   return (
     <SimpleGrid columns={{ base: 1 , md: 2 }} gap={2}>
