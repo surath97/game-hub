@@ -19,7 +19,7 @@ const HomePage = () => {
         lg: "250px 1fr",
       }}
     >
-      <GridItem area="aside" hideBelow="lg" paddingX={5}>
+      <GridItem area="aside" hideBelow="lg" >
         <GenreList />
       </GridItem>
       <GridItem area="main">

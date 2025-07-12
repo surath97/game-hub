@@ -1,6 +1,6 @@
 import { HStack, Icon, Text } from "@chakra-ui/react";
 import type { IconType } from "react-icons";
-import type { Platform } from "../hooks/useGames";
+import type { Platform } from "../entities/Game";
 
 // icon imports
 import { CgMicrosoft } from "react-icons/cg";

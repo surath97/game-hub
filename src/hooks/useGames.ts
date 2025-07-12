@@ -1,24 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
+import type { Game } from "../entities/Game";
 import APIClient, { type FetchResponse } from "../services/api-client";
 import useGameQueryStore from "../store";
-
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-export interface Game {
-  id: number;
-  name: string;
-  slug: string;
-  background_image: string;
-  description_raw: string
-  parent_platforms: { platform: Platform }[];
-  metacritic: number | null;
-  rating_top: number;
-}
 
 // undefined: The absence of a value
 // null:      The intenational absence of a value --> unselect
