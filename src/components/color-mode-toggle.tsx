@@ -10,9 +10,9 @@ export function ColorModeToggle() {
   return (
     <HStack>
       <IconButton aria-label="toggle color mode" variant='surface' onClick={toggleColorMode}>
-        {theme === "light" ? <LuMoon /> : <LuSun />}
+        {theme === "light" ? <LuSun /> : <LuMoon />}
       </IconButton>
-      <Text whiteSpace='nowrap'>{theme === "light" ? 'Dark' : 'Light'} Mode</Text>
+      <Text whiteSpace='nowrap' hideBelow={"md"}>{theme === "light" ? 'Light' : 'Dark'} Mode</Text>
     </HStack>
   )
 }
