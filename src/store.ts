@@ -38,3 +38,25 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
 
 
 export default useGameQueryStore;
+
+
+// ------------------------------- Hover Store
+
+interface hoverStateObject {
+  hover: boolean;
+  game_id?: number;
+}
+
+interface hoverStore {
+  hover: hoverStateObject;
+  setHover: (hover_set: boolean, id: number) => void;
+}
+
+export const useHoverStore = create<hoverStore>((set) => ({
+
+  hover: { hover: false},
+
+  setHover: (hover_set, id) => 
+    set(() => ({ hover: { hover: hover_set, game_id: id } }))
+}))
+

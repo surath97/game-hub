@@ -7,6 +7,7 @@ import Emoji from "./Emoji";
 import PlatformIconList from "./PlatformIconList";
 import { useState } from "react";
 import Carousel from "./Carousel";
+import { useHoverStore } from "../store";
 
 interface Props {
   game: Game;
@@ -14,13 +15,13 @@ interface Props {
 
 function GameCard({game}: Props) {
 
-  const [is_m_over, setIs_m_over] = useState(false)
+  const hoverStore = useHoverStore();
 
   return (
-    <Card.Root variant='elevated' onMouseOver={() => {setIs_m_over(true)}} onMouseOut={() => {setIs_m_over(false)}}>
+    <Card.Root variant='elevated' onMouseOver={() => {hoverStore.setHover(true, game.id)}} onMouseOut={() => {hoverStore.setHover(false, game.id)}}>
 
-      { (is_m_over) ? 
-        <Carousel screenshots={game.short_screenshots} /> :
+      { (hoverStore.hover && game.id === hoverStore.hover.game_id && game.background_image) ? 
+        <Carousel screenshots={game.short_screenshots} game_id={game.id} /> :
         <Image src={getCroppedImageURL(game.background_image)} />
       }
 

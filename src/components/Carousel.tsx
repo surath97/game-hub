@@ -2,14 +2,17 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import type { short_screenshots } from "../entities/Game";
 import { useEffect, useState } from "react";
 import getCroppedImageURL from "../services/image-url";
+import { useHoverStore } from "../store";
 
 interface Props {
   screenshots: short_screenshots[];
+  game_id: number;
 }
 
-const Carousel = ({ screenshots }: Props) => {
+const Carousel = ({ screenshots, game_id }: Props) => {
+
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
+  const hoverState = useHoverStore();
 
   
   // Auto-switch slides when hovering
@@ -17,20 +20,18 @@ const Carousel = ({ screenshots }: Props) => {
 
     let interval: number | undefined;
 
-    if (isHovering) {
+    if (hoverState.hover && (game_id === hoverState.hover.game_id)) {
       interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % screenshots.length);
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isHovering, screenshots.length]);
+  }, []);
 
 
   return (
     <Box
       position="relative"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
     >
       <Box overflow="hidden" boxShadow="lg">
         <Flex
@@ -59,12 +60,12 @@ const Carousel = ({ screenshots }: Props) => {
       </Box>
 
       {/* Dots for slide indication */}
-      <Flex justify="center" mt={4}>
+      <Flex justify="center" mt={4} className="opacity-75">
         {screenshots.map((_, index) => (
           <Box
             key={index}
-            w={3}
-            h={3}
+            w={4}
+            h={2}
             mx={1}
             borderRadius="full"
             bg={currentSlide === index ? "purple.700" : "gray.300"}
