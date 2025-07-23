@@ -9,7 +9,7 @@ interface Props {
 function GameCardContainer({children}: Props) {
   
   return (
-    <Box borderRadius={10} overflow={'hidden'}>
+    <Box borderRadius={10} overflow={'hidden'} className="hover:scale-110 transition-all duration-200">
       {children}
     </Box>
   )

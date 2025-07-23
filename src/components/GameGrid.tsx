@@ -6,6 +6,7 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
+import { Link } from "react-router-dom";
 
 
 function GameGrid() {
@@ -36,6 +37,7 @@ function GameGrid() {
   return (
 
     <InfiniteScroll
+      className="!overflow-visible"
       dataLength={fetchedGamesCount}
       hasMore={hasNextPage}
       next={() => fetchNextPage()}
@@ -75,7 +77,9 @@ function GameGrid() {
           <React.Fragment key={index}>
             {page.results.map((game) => (
               <GameCardContainer key={game.id}>
-                <GameCard game={game} />
+                <Link to={'/games/' + game.slug}>
+                  <GameCard game={game} />
+                </Link>
               </GameCardContainer>
             ))}
           </React.Fragment>

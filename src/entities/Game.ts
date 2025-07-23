@@ -12,10 +12,16 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number | null;
   rating_top: number;
+  short_screenshots : short_screenshots[];
 }
 
 export interface Platform {
   id: number;
   name: string;
   slug: string;
+}
+
+export interface short_screenshots {
+  id: number;
+  image: string;
 }
